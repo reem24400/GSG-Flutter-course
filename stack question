@@ -1,0 +1,44 @@
+// stack question
+
+// create the stack
+class Stack<Type> { // i did not specify a type like int or string so it can accept any user input
+  final List<Type> _stack = [];
+
+  void push(Type element) => _stack.add(element); // add new value to the top
+
+  Type? pop() => _stack.isNotEmpty ? _stack.removeLast() : null; // remove the top value
+
+  Type? peek() => _stack.isNotEmpty ? _stack.last : null; // only get or display the top value 
+
+  bool get isEmpty => _stack.isEmpty;
+
+  @override
+  String toString() => _stack.toString();
+}
+
+// question one rev. list
+List<Type> reverseList<Type>(List<Type> list) {
+  final stack = Stack<Type>();
+  for (var item in list) {
+    stack.push(item);
+  }
+  final reversedList = <Type>[]; 
+  while (!stack.isEmpty) {
+    reversedList.add(stack.pop()!);
+  }
+  return reversedList;
+}
+
+// question two check for (), please note that i searched the web as i did not get the idea/goal of the question 
+bool isBalanced(String s) {
+  final stack = Stack<String>();
+  for (var ch in s.split('')) {
+    if (ch == '(') {
+      stack.push(ch);
+    } else if (ch == ')') {
+      if (stack.isEmpty) return false;
+      stack.pop();
+    }
+  }
+  return stack.isEmpty;
+}
